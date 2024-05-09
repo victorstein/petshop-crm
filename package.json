@@ -1,0 +1,69 @@
+{
+  "name": "notus-nextjs",
+  "homepage": "https://demos.creative-tim.com/notus-nextjs",
+  "version": "1.1.0",
+  "description": "Notus NextJS - A free Tailwind CSS, NextJS and React Ui Kit and Admin by Creative Tim.",
+  "repository": "https://github.com/creativetimofficial/notus-nextjs",
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "6.5.2",
+    "@popperjs/core": "2.11.8",
+    "chart.js": "4.4.2",
+    "firebase": "^10.11.1",
+    "gulp": "5.0.0",
+    "gulp-append-prepend": "1.0.9",
+    "next": "14.2.3",
+    "prop-types": "^15.8.1",
+    "react": "18.3.1",
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "18.3.1",
+    "sharp": "^0.33.3"
+  },
+  "scripts": {
+    "start": "next start",
+    "build": "next build",
+    "dev": "next dev",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --check \"**/*.{ts,tsx}\"",
+    "verify": "yarn lint && yarn format && yarn type-check",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm run build:tailwind && npm run dev",
+    "build:tailwind": "tailwind build styles/index.css -o styles/tailwind.css"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "optionalDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^14.2.3",
+    "@tailwindcss/forms": "0.5.7",
+    "@types/react": "18.3.1",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^14.2.3",
+    "eslint-config-standard-with-typescript": "^43.0.1",
+    "eslint-plugin-check-file": "^2.7.1",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.2.4",
+    "tailwindcss": "^3.4.3"
+  }
+}
