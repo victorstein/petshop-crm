@@ -1,10 +1,10 @@
 // components
 
-import { CardTable } from 'components/Cards/CardTable'
+import { CardTable } from 'components/cards/card-table'
 
 // layout for page
 
-import Admin from 'layouts/Admin'
+import Admin from 'layouts/admin'
 import type { FC, ReactNode } from 'react'
 
 export type TablesProps = FC & {

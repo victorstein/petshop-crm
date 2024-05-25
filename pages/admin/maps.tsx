@@ -1,10 +1,10 @@
 // components
 
-import MapExample from 'components/Maps/MapExample'
+import MapExample from 'components/maps/map-example'
 
 // layout for page
 
-import Admin from 'layouts/Admin'
+import Admin from 'layouts/admin'
 import type { FC, ReactNode } from 'react'
 
 export type MapsProps = FC & {

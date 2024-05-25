@@ -1,6 +1,6 @@
 // layout for page
 
-import Auth from 'layouts/Auth'
+import Auth from 'layouts/auth'
 import Image from 'next/image'
 import Github from 'public/img/github.svg'
 import type { FC, ReactNode } from 'react'

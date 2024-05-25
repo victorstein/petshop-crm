@@ -1,13 +1,13 @@
 // components
 
-import CardLineChart from 'components/Cards/CardLineChart'
-import CardBarChart from 'components/Cards/CardBarChart'
-import CardPageVisits from 'components/Cards/CardPageVisits'
-import CardSocialTraffic from 'components/Cards/CardSocialTraffic'
+import CardLineChart from 'components/cards/card-line-chart'
+import CardBarChart from 'components/cards/card-bar-chart'
+import CardPageVisits from 'components/cards/card-page-visits'
+import CardSocialTraffic from 'components/cards/card-social-traffic'
 
 // layout for page
 
-import Admin from 'layouts/Admin'
+import Admin from 'layouts/admin'
 import type { FC, ReactNode } from 'react'
 
 export type DashboardProps = FC & {

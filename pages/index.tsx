@@ -12,8 +12,8 @@ import Login from 'public/img/login.jpg'
 import Profile from 'public/img/profile.jpg'
 import Landing from 'public/img/landing.jpg'
 
-import IndexNavbar from 'components/Navbars/IndexNavbar'
-import Footer from 'components/Footers/Footer'
+import IndexNavbar from 'components/navbars/index-navbar'
+import Footer from 'components/footers/footer'
 import type { FC } from 'react'
 import Image from 'next/image'
 

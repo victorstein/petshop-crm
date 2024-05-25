@@ -1,11 +1,11 @@
 // components
 
-import CardSettings from 'components/Cards/CardSettings'
-import CardProfile from 'components/Cards/CardProfile'
+import CardSettings from 'components/cards/card-settings'
+import CardProfile from 'components/cards/card-profile'
 
 // layout for page
 
-import Admin from 'layouts/Admin'
+import Admin from 'layouts/admin'
 import type { FC, ReactNode } from 'react'
 
 export type SettingsProps = FC & {

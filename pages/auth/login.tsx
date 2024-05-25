@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 // layout for page
 
-import Auth from 'layouts/Auth'
+import Auth from 'layouts/auth'
 import type { FC, ReactNode } from 'react'
 import Image from 'next/image'
 import Github from 'public/img/github.svg'

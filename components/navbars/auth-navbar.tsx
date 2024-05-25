@@ -1,7 +1,7 @@
 import Link from 'next/link'
 // components
 
-import PagesDropdown from 'components/Dropdowns/PagesDropdown'
+import PagesDropdown from 'components/dropdowns/pages-dropdown'
 import { type FC, useState } from 'react'
 
 const Navbar: FC = () => {

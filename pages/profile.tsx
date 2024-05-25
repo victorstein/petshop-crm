@@ -1,5 +1,5 @@
-import Navbar from 'components/Navbars/AuthNavbar'
-import Footer from 'components/Footers/Footer'
+import Navbar from 'components/navbars/auth-navbar'
+import Footer from 'components/footers/footer'
 import type { FC } from 'react'
 import Image from 'next/image'
 import Team2 from 'public/img/team-2-800x800.jpg'
