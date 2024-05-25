@@ -1,7 +1,7 @@
 import Link from 'next/link'
 // components
 
-import IndexDropdown from 'components/Dropdowns/IndexDropdown'
+import IndexDropdown from 'components/dropdowns/index-dropdown'
 import { type FC, useState } from 'react'
 
 const Navbar: FC = () => {

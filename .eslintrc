@@ -15,6 +15,7 @@
           "version": "detect"
         }
       },
+      "excludedFiles": ["node_modules", ".next", "next-env.d.ts"],
       "rules": {
         "@typescript-eslint/no-var-requires": 0,
         "@typescript-eslint/no-unnecessary-boolean-literal-compare": 0,
@@ -29,13 +30,13 @@
         "check-file/filename-naming-convention": [
           "error",
           {
-            "src/**/*.{ts,tsx}": "KEBAB_CASE"
+            "**/!(_|[0-9])*.{ts,tsx}": "KEBAB_CASE"
           }
         ],
         "check-file/folder-naming-convention": [
           "error",
           {
-            "src/**/": "KEBAB_CASE"
+            "**/": "KEBAB_CASE"
           }
         ]
       }

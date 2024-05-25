@@ -11,7 +11,7 @@ import Team4 from 'public/img/team-4-470x470.png'
 
 // components
 
-import TableDropdown from 'components/Dropdowns/TableDropdown'
+import TableDropdown from 'components/dropdowns/table-dropdown'
 import Image from 'next/image'
 
 export interface CardTableProps {

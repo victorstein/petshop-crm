@@ -2,8 +2,8 @@ import { type FC, type ReactNode } from 'react'
 
 // components
 
-import Navbar from 'components/Navbars/AuthNavbar'
-import FooterSmall from 'components/Footers/FooterSmall'
+import Navbar from 'components/navbars/auth-navbar'
+import FooterSmall from 'components/footers/footer-small'
 
 const Auth: FC<{ children: ReactNode }> = ({ children }) => {
   return (

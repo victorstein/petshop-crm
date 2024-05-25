@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import NotificationDropdown from 'components/Dropdowns/NotificationDropdown'
-import UserDropdown from 'components/Dropdowns/UserDropdown'
+import NotificationDropdown from 'components/dropdowns/notification-dropdown'
+import UserDropdown from 'components/dropdowns/user-dropdown'
 import { type FC, useState } from 'react'
 
 const Sidebar: FC = () => {

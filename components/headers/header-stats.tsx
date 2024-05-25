@@ -1,6 +1,6 @@
 // components
 
-import CardStats from 'components/Cards/CardStats'
+import CardStats from 'components/cards/card-stats'
 import type { FC } from 'react'
 
 const HeaderStats: FC = () => {

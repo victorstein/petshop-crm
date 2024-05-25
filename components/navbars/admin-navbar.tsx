@@ -1,4 +1,4 @@
-import UserDropdown from 'components/Dropdowns/UserDropdown'
+import UserDropdown from 'components/dropdowns/user-dropdown'
 import { type FC } from 'react'
 
 const Navbar: FC = () => {

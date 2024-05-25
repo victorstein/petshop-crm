@@ -2,10 +2,10 @@ import { type FC, type ReactNode } from 'react'
 
 // components
 
-import AdminNavbar from 'components/Navbars/AdminNavbar'
-import Sidebar from 'components/Sidebar/Sidebar'
-import HeaderStats from 'components/Headers/HeaderStats'
-import FooterAdmin from 'components/Footers/FooterAdmin'
+import AdminNavbar from 'components/navbars/admin-navbar'
+import Sidebar from 'components/sidebar/sidebar'
+import HeaderStats from 'components/headers/header-stats'
+import FooterAdmin from 'components/footers/footer-admin'
 
 const Admin: FC<{ children: ReactNode }> = ({ children }) => {
   return (
