@@ -12,7 +12,10 @@
     "baseUrl": ".",
     "noEmit": true,
     "allowJs": true,
-    "incremental": true
+    "incremental": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.js"],
   "exclude": ["node_modules"]
