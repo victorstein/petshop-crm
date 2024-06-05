@@ -27,7 +27,10 @@ const app = ({ Component, pageProps }: AppComponentProps): JSX.Element => {
           content='width=device-width, initial-scale=1, shrink-to-fit=no'
         />
         <title>Pet Shop CRM</title>
-        <script async src='https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE'></script>
+        <script
+          async
+          src='https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE'
+        ></script>
       </Head>
       <Layout>
         <Component {...pageProps} />

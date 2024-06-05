@@ -6,9 +6,7 @@ import { WelcomePropmt } from '../ai/promts'
 const Index: FC = () => {
   const { response, isLoading } = useAi(WelcomePropmt)
   return (
-    <>
-      {isLoading ? 'AI is generating content, please wait...' : response}
-    </>
+    <>{isLoading ? 'AI is generating content, please wait...' : response}</>
   )
 }
 
