@@ -27,5 +27,6 @@ out/
 
 commit.sh
 firebase-key.json
+firebase-*.json
 
 .env
