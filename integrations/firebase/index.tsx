@@ -20,12 +20,14 @@ export const firebase = initializeApp({
 export const db = getFirestore(firebase)
 
 // Security related
-export const appCheck = initializeAppCheck(firebase, {
-  provider: new ReCaptchaEnterpriseProvider(
-    process.env.NEXT_PUBLIC_FIREBASE_RECAPTCHA_SITE_KEY ?? ''
-  ),
-  isTokenAutoRefreshEnabled: true // Set to true to allow auto-refresh.
-})
+if (typeof window !== 'undefined') {
+  initializeAppCheck(firebase, {
+    provider: new ReCaptchaEnterpriseProvider(
+      process.env.NEXT_PUBLIC_FIREBASE_RECAPTCHA_SITE_KEY ?? ''
+    ),
+    isTokenAutoRefreshEnabled: true // Set to true to allow auto-refresh.
+  })
+}
 
 // AI related
 const vertexAI = getVertexAI(firebase)
