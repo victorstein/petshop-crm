@@ -1,6 +1,10 @@
 import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
 import { getVertexAI, getGenerativeModel } from 'firebase/vertexai-preview'
+import {
+  initializeAppCheck,
+  ReCaptchaEnterpriseProvider
+} from 'firebase/app-check'
 
 // Initialize Firebase
 export const firebase = initializeApp({
@@ -14,6 +18,14 @@ export const firebase = initializeApp({
 
 // Database
 export const db = getFirestore(firebase)
+
+// Security related
+export const appCheck = initializeAppCheck(firebase, {
+  provider: new ReCaptchaEnterpriseProvider(
+    process.env.NEXT_PUBLIC_FIREBASE_RECAPTCHA_SITE_KEY ?? ''
+  ),
+  isTokenAutoRefreshEnabled: true // Set to true to allow auto-refresh.
+})
 
 // AI related
 const vertexAI = getVertexAI(firebase)
