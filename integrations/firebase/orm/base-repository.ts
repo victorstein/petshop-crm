@@ -94,4 +94,21 @@ export abstract class BaseRepository<T> {
 
     return { id: docRef, ...mainCollectionData } as T
   }
+
+  async findById(id: string | FireStore.DocumentReference): Promise<T | null> {
+    // allows digesting Document references
+    if (id instanceof FireStore.DocumentReference) {
+      id = id.id
+    }
+
+    const doc = await this.firestore.getDoc(
+      this.firestore.doc(this.database, this.model.name, id)
+    )
+
+    if (!doc.exists()) {
+      return null
+    }
+
+    return { id, ...doc.data() } as T
+  }
 }
