@@ -8,12 +8,12 @@ import {
   shelteredAnimalRepository
 } from 'integrations/firebase/schema/sheltered-animal'
 import { createDummyMedia } from './media'
-import type { FirestoreDocumentReference } from 'shared/firebase-utils'
 import type { RecursiveOmit } from 'integrations/firebase/orm/types'
+import type { DocumentReference } from 'firebase/firestore'
 
 export const createDummyShelteredAnimal = async (
-  shelterRef: FirestoreDocumentReference,
-  breedRef: FirestoreDocumentReference,
+  shelterRef: DocumentReference,
+  breedRef: DocumentReference,
   shelteredAnimalData?: Partial<ShelteredAnimal>
 ): Promise<RecursiveOmit<ShelteredAnimal, 'id'>> => {
   const [profilePicture, ...gallery] = Array.from({ length: 4 }, () =>

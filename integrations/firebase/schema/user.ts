@@ -9,8 +9,8 @@ import { Media } from './media'
 import { SocialMediaProvider } from './social-media-provider'
 import { SubCollection } from '../orm/decorators/sub-collection'
 import { Type } from 'class-transformer'
-import type { FirestoreDocumentReference } from 'shared/firebase-utils'
 import { getRepository } from '../orm/get-repository'
+import type { DocumentReference } from 'firebase/firestore'
 
 export enum SupportedRoles {
   ADMIN = 'admin',
@@ -19,7 +19,7 @@ export enum SupportedRoles {
 }
 
 export class User {
-  id: FirestoreDocumentReference
+  id: DocumentReference
 
   @SubCollection()
   @Type(() => Media)

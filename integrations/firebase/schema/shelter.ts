@@ -12,7 +12,7 @@ import { Address } from './address'
 import { SubCollection } from '../orm/decorators/sub-collection'
 import { Type } from 'class-transformer'
 import { getRepository } from '../orm/get-repository'
-import type { FirestoreDocumentReference } from 'shared/firebase-utils'
+import type { DocumentReference } from 'firebase/firestore'
 
 export enum SupportedShelterTypes {
   MUNICIPAL = 'municipal',
@@ -23,7 +23,7 @@ export enum SupportedShelterTypes {
 }
 
 export class Shelter {
-  id: FirestoreDocumentReference
+  id: DocumentReference
 
   @SubCollection()
   @Type(() => Address)

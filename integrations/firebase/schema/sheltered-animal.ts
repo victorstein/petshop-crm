@@ -9,10 +9,10 @@ import {
   ValidateNested
 } from 'class-validator'
 import { Media } from './media'
-import { FirestoreDocumentReference } from 'shared/firebase-utils'
 import { SubCollection } from '../orm/decorators/sub-collection'
 import { Type } from 'class-transformer'
 import { getRepository } from '../orm/get-repository'
+import { DocumentReference } from 'firebase/firestore'
 
 export enum SupportedEnergyLevels {
   LOW = 'low',
@@ -52,7 +52,7 @@ export enum SupportedIntakeTypes {
 }
 
 export class ShelteredAnimal {
-  id: FirestoreDocumentReference
+  id: DocumentReference
 
   @IsString()
   @IsNotEmpty()
@@ -97,10 +97,10 @@ export class ShelteredAnimal {
   intakeType: SupportedIntakeTypes
 
   @IsNotEmpty()
-  breed: FirestoreDocumentReference
+  breed: DocumentReference
 
   @IsNotEmpty()
-  shelter: FirestoreDocumentReference
+  shelter: DocumentReference
 }
 
 export const shelteredAnimalRepository = getRepository(ShelteredAnimal)

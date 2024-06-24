@@ -7,13 +7,11 @@ import {
 import { createDummyAddress } from './address'
 import { createDummyMedia } from './media'
 import type { RecursiveOmit } from 'integrations/firebase/orm/types'
-import type { FirestoreDocumentReference } from 'shared/firebase-utils'
+import type { DocumentReference } from 'firebase/firestore'
 
 export const createDummyShelter = async (
   shelterData?: Partial<Shelter>
-): Promise<
-  RecursiveOmit<Shelter, 'id'> & { id: FirestoreDocumentReference }
-> => {
+): Promise<RecursiveOmit<Shelter, 'id'> & { id: DocumentReference }> => {
   // Create dummy media
   const [logo, ...shelterMedia] = Array.from({ length: 4 }, () =>
     createDummyMedia()

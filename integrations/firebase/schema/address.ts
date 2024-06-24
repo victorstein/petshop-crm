@@ -1,8 +1,8 @@
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator'
-import type { FirestoreDocumentReference } from 'shared/firebase-utils'
+import type { DocumentReference } from 'firebase/firestore'
 
 export class Address {
-  id: FirestoreDocumentReference
+  id: DocumentReference
 
   @IsString()
   @IsNotEmpty()

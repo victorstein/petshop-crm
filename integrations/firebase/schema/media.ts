@@ -1,5 +1,5 @@
 import { IsEnum, IsNotEmpty, IsString, IsUrl } from 'class-validator'
-import type { FirestoreDocumentReference } from 'shared/firebase-utils'
+import type { DocumentReference } from 'firebase/firestore'
 
 export enum SupportedMimeTypes {
   JPEG = 'image/jpeg',
@@ -8,7 +8,7 @@ export enum SupportedMimeTypes {
 }
 
 export class Media {
-  id: FirestoreDocumentReference
+  id: DocumentReference
 
   @IsString()
   @IsNotEmpty()

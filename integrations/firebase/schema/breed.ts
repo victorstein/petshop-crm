@@ -1,9 +1,9 @@
 import { IsArray, IsNotEmpty, IsOptional, IsString } from 'class-validator'
-import type { FirestoreDocumentReference } from 'shared/firebase-utils'
 import { getRepository } from '../orm/get-repository'
+import type { DocumentReference } from 'firebase/firestore'
 
 export class Breed {
-  id: FirestoreDocumentReference
+  id: DocumentReference
 
   @IsString()
   @IsNotEmpty()

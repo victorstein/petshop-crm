@@ -1,5 +1,5 @@
 import { IsEnum } from 'class-validator'
-import type { FirestoreDocumentReference } from 'shared/firebase-utils'
+import type { DocumentReference } from 'firebase/firestore'
 
 export enum SupportedAuthProviders {
   FACEBOOK = 'facebook.com',
@@ -12,7 +12,7 @@ export enum SupportedAuthProviders {
 }
 
 export class SocialMediaProvider {
-  id: FirestoreDocumentReference
+  id: DocumentReference
 
   @IsEnum(SupportedAuthProviders)
   provider: SupportedAuthProviders
