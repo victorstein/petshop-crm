@@ -15,7 +15,7 @@ export const createDummyShelteredAnimal = async (
   shelterRef: DocumentReference,
   breedRef: DocumentReference,
   shelteredAnimalData?: Partial<ShelteredAnimal>
-): Promise<RecursiveOmit<ShelteredAnimal, 'id'>> => {
+): Promise<ShelteredAnimal> => {
   const [profilePicture, ...gallery] = Array.from({ length: 4 }, () =>
     createDummyMedia()
   )
