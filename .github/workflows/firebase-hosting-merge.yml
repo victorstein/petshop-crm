@@ -5,12 +5,12 @@ name: Deploy to Firebase Hosting on merge
 on:
   push:
     branches:
-      - main
+      - development
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    environment: production
+    environment: development
     steps:
       - uses: actions/checkout@v4
       - run: yarn install --frozen-lockfile
