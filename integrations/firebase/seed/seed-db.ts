@@ -5,6 +5,7 @@ import { createDummyShelter } from 'tests/fixtures/shelter'
 import { createDummyShelteredAnimal } from 'tests/fixtures/sheltered-animal'
 import { createDummyUser } from 'tests/fixtures/user'
 import { shelteredAnimalRepository } from '../schema/sheltered-animal'
+import { breedRepository } from '../schema/breed'
 
 const seedDb = async (): Promise<void> => {
   const shelter = await createDummyShelter()
@@ -17,6 +18,18 @@ const seedDb = async (): Promise<void> => {
     { pupulate: true }
   )
   console.log('Sheltered Animal found:', foundShelteredAnimal)
+
+  const foundBreed = await breedRepository.findById(
+    foundShelteredAnimal.breed.id
+  )
+
+  const query = shelteredAnimalRepository.query(
+    shelteredAnimalRepository.where('breed', '==', foundBreed.id)
+  )
+
+  const shelteredAnimals = await shelteredAnimalRepository.find(query)
+
+  console.log('Sheltered Animals found:', shelteredAnimals)
 
   console.log('Database seeded successfully 🌱')
   process.exit(0)

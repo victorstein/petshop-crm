@@ -7,10 +7,27 @@ export abstract class BaseRepository<T> {
   abstract readonly model: Constructor<T>
   readonly firestore: typeof FireStore
   readonly database: FireStore.Firestore
+  readonly where = FireStore.where
+  readonly orderBy = FireStore.orderBy
+  readonly limit = FireStore.limit
+  readonly startAfter = FireStore.startAfter
+  readonly startAt = FireStore.startAt
+  readonly endBefore = FireStore.endBefore
+  readonly endAt = FireStore.endAt
+  readonly limitToLast = FireStore.limitToLast
+  readonly or = FireStore.or
 
   constructor(database?: FireStore.Firestore, fireStore?: typeof FireStore) {
     this.firestore = fireStore ?? FireStore
     this.database = database ?? db
+  }
+
+  query(...queryConstraints: FireStore.QueryConstraint[]): FireStore.Query {
+    return this.firestore.query(this.collection, ...queryConstraints)
+  }
+
+  get collection(): FireStore.CollectionReference {
+    return this.firestore.collection(this.database, this.model.name)
   }
 
   private getSubCollections(): Record<keyof T, unknown> {
@@ -43,6 +60,10 @@ export abstract class BaseRepository<T> {
     )
 
     return parsedMeta
+  }
+
+  private getRefFromId(id: string): FireStore.DocumentReference {
+    return this.firestore.doc(this.database, this.model.name, id)
   }
 
   @ValidateSchema()
@@ -113,7 +134,7 @@ export abstract class BaseRepository<T> {
   async findById(
     id: string | FireStore.DocumentReference,
     options: { pupulate: boolean } = { pupulate: false }
-  ): Promise<T | null> {
+  ): Promise<T> {
     // allows digesting Document references
     if (id instanceof FireStore.DocumentReference) {
       id = id.id
@@ -124,13 +145,13 @@ export abstract class BaseRepository<T> {
     )
 
     if (!doc.exists()) {
-      return null
+      throw new Error(`${this.model.name} not found`)
     }
 
     const subCollections = this.getSubCollections()
 
-    if (!options.pupulate || subCollections === undefined) {
-      return { id, ...doc.data() } as T
+    if (options.pupulate === false || subCollections === undefined) {
+      return { id: this.getRefFromId(id), ...doc.data() } as T
     }
 
     const subCollectionsKeys = Object.keys(subCollections)
@@ -147,7 +168,7 @@ export abstract class BaseRepository<T> {
         const subCollectionDocs = await this.firestore.getDocs(subCollection)
 
         return subCollectionDocs.docs.map((subCollection) => ({
-          id: subCollection.id,
+          id: this.getRefFromId(subCollection.id),
           ...subCollection.data()
         }))
       })
@@ -161,6 +182,27 @@ export abstract class BaseRepository<T> {
       {}
     )
 
-    return { id, ...doc.data(), ...subCollectionsDataMap } as T
+    return {
+      id: this.getRefFromId(id),
+      ...doc.data(),
+      ...subCollectionsDataMap
+    } as T
+  }
+
+  async find(
+    query: FireStore.Query,
+    options: { pupulate: boolean } = { pupulate: false }
+  ): Promise<T[]> {
+    const docs = await this.firestore.getDocs(query)
+
+    if (docs.empty) {
+      return []
+    }
+
+    return await Promise.all(
+      docs.docs.map(async (doc) => {
+        return await this.findById(doc.id, options)
+      })
+    )
   }
 }
