@@ -40,7 +40,7 @@
     "functions:logs": "firebase functions:log"
   },
   "engines": {
-    "node": "22.3.0"
+    "node": "20"
   },
   "main": "functions/lib/index.js",
   "eslintConfig": {
