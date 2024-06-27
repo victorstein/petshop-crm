@@ -212,4 +212,65 @@ export abstract class BaseRepository<T> {
       })
     )
   }
+
+  async delete(
+    id: string | FireStore.DocumentReference,
+    options: { cascade: boolean } = { cascade: false }
+  ): Promise<void> {
+    if (id instanceof FireStore.DocumentReference) {
+      id = id.id
+    }
+
+    const doc = await this.firestore.getDoc(
+      this.firestore.doc(this.database, this.model.name, id)
+    )
+
+    if (!doc.exists()) {
+      throw new Error(`${this.model.name} not found`)
+    }
+
+    const subCollections = this.getSubCollections()
+
+    if (options.cascade === false || subCollections === undefined) {
+      await this.firestore.deleteDoc(
+        this.firestore.doc(this.database, this.model.name, id)
+      )
+      return
+    }
+
+    const subCollectionsKeys = Object.keys(subCollections)
+
+    // delete all subcollections
+    await Promise.all(
+      subCollectionsKeys.map(async (key) => {
+        const subCollection = this.firestore.collection(
+          this.database,
+          this.model.name,
+          doc.id,
+          key
+        )
+
+        const subCollectionDocs = await this.firestore.getDocs(subCollection)
+
+        await Promise.all(
+          subCollectionDocs.docs.map(async (subCollectionDoc) => {
+            await this.firestore.deleteDoc(
+              this.firestore.doc(
+                this.database,
+                this.model.name,
+                doc.id,
+                key,
+                subCollectionDoc.id
+              )
+            )
+          })
+        )
+      })
+    )
+
+    // delete main collection
+    await this.firestore.deleteDoc(
+      this.firestore.doc(this.database, this.model.name, id)
+    )
+  }
 }
