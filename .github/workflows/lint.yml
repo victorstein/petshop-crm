@@ -19,5 +19,5 @@ jobs:
 
       - name: Run lint
         run: |
-          yarn install
+          yarn install --frozen-lockfile
           yarn verify
