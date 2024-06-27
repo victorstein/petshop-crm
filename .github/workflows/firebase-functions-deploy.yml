@@ -16,7 +16,7 @@ jobs:
         id: auth
         uses: google-github-actions/auth@v1
         with:
-          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}            
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PET_SHOP_CRM }}            
       
       - name: Deploy to Firebase
         run: yarn functions:deploy
