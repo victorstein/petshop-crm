@@ -29,6 +29,10 @@ const seedDb = async (): Promise<void> => {
 
   const shelteredAnimals = await shelteredAnimalRepository.find(query)
 
+  await shelteredAnimalRepository.delete(foundShelteredAnimal.id, {
+    cascade: true
+  })
+
   console.log('Sheltered Animals found:', shelteredAnimals)
 
   console.log('Database seeded successfully 🌱')
