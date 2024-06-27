@@ -199,6 +199,13 @@ export abstract class BaseRepository<T> {
       return []
     }
 
+    if (options.pupulate === false) {
+      return docs.docs.map((doc) => ({
+        id: this.getRefFromId(doc.id),
+        ...doc.data()
+      })) as T[]
+    }
+
     return await Promise.all(
       docs.docs.map(async (doc) => {
         return await this.findById(doc.id, options)
