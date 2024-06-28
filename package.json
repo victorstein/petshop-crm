@@ -12,7 +12,6 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "firebase": "10.12.2",
-    "firebase-admin": "^12.1.1",
     "gulp": "5.0.0",
     "gulp-append-prepend": "1.0.9",
     "next": "14.2.3",
@@ -20,8 +19,9 @@
     "react": "18.3.1",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "18.3.1",
-    "reflect-metadata": "^0.2.2",
-    "sharp": "^0.33.3"
+    "sharp": "^0.33.3",
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^5.0.0"
   },
   "scripts": {
     "seed": "ts-node -r tsconfig-paths/register integrations/firebase/seed/seed-db.ts",
@@ -33,8 +33,19 @@
     "format": "prettier --check \"**/*.{ts,tsx}\"",
     "verify": "yarn lint && yarn format && yarn type-check",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm run build:tailwind && npm run dev",
-    "build:tailwind": "tailwind build styles/index.css -o styles/tailwind.css"
+    "build:tailwind": "tailwind build styles/index.css -o styles/tailwind.css",
+    "functions:build": "tsc -P functions/tsconfig.json",
+    "functions:build:watch": "tsc -P functions/tsconfig.json --watch",
+    "functions:serve": "npm run functions:build && firebase emulators:start --only functions",
+    "functions:shell": "npm run functions:build && firebase functions:shell",
+    "functions:start": "npm run functions:shell",
+    "functions:deploy": "firebase deploy --only functions",
+    "functions:logs": "firebase functions:log"
   },
+  "engines": {
+    "node": "20"
+  },
+  "main": "functions/lib/index.js",
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -73,6 +84,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^3.2.4",
     "tailwindcss": "^3.4.3",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "firebase-functions-test": "^3.1.0"
   }
 }
