@@ -30,3 +30,9 @@ firebase-key.json
 firebase-*.json
 
 .env
+
+firebase-debug.log
+ui-debug.log
+
+functions/lib/**/*.js
+functions/lib/**/*.js.map

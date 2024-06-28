@@ -1,0 +1,30 @@
+name: Deploy to Firebase Functions
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy_functions:
+    runs-on: ubuntu-latest
+    environment: development
+    steps:
+      - uses: actions/checkout@v4      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: yarn install --frozen-lockfile      
+      - name: Install Firebase Tools
+        run: yarn global add firebase-tools
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v1
+        with:
+          node-version: 20
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PET_SHOP_CRM }}                  
+      - name: Deploy to Firebase
+        run: yarn functions:deploy
+        working-directory: functions
+        env:
+          PROJECT_ID: ${{ vars.NEXT_PUBLIC_FIREBASE_APP_ID }}
