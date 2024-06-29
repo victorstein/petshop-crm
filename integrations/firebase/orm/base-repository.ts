@@ -2,6 +2,7 @@ import * as FireStore from 'firebase/firestore'
 import { db } from '..'
 import { type Constructor, type RecursiveOmit } from './types'
 import { ValidateSchema } from './decorators/validate-schema'
+import { type SubCollectionMetadata } from './decorators/sub-collection'
 
 export abstract class BaseRepository<T> {
   abstract readonly model: Constructor<T>
@@ -175,10 +176,23 @@ export abstract class BaseRepository<T> {
     )
 
     const subCollectionsDataMap = subCollectionsKeys.reduce(
-      (acc, key, index) => ({
-        ...acc,
-        [key]: subCollectionsData[index]
-      }),
+      (acc, key, index) => {
+        const subCollectionType = subCollections[
+          subCollectionsKeys[index] as keyof T
+        ] as SubCollectionMetadata
+
+        if (subCollectionType.type === 'Array') {
+          return {
+            ...acc,
+            [key]: subCollectionsData[index]
+          }
+        }
+
+        return {
+          ...acc,
+          [key]: subCollectionsData[index][0]
+        }
+      },
       {}
     )
 
