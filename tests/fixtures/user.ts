@@ -20,7 +20,7 @@ export const createDummyUser = async (
     email: faker.internet.email(),
     profilePicture,
     role: faker.helpers.arrayElement(Object.values(SupportedRoles)),
-    socialMediaProvider,
+    socialMediaProvider: [socialMediaProvider],
     ...userData
   }
 
