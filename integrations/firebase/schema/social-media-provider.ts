@@ -1,4 +1,4 @@
-import { IsEnum } from 'class-validator'
+import { IsEnum, IsObject } from 'class-validator'
 import type { DocumentReference } from 'firebase/firestore'
 
 export enum SupportedAuthProviders {
@@ -17,5 +17,6 @@ export class SocialMediaProvider {
   @IsEnum(SupportedAuthProviders)
   provider: SupportedAuthProviders
 
+  @IsObject()
   metadata?: Record<string, any>
 }

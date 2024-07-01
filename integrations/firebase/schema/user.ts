@@ -42,8 +42,8 @@ export class User {
 
   @SubCollection()
   @Type(() => SocialMediaProvider)
-  @ValidateNested()
-  socialMediaProvider: SocialMediaProvider
+  @ValidateNested({ each: true })
+  socialMediaProvider: SocialMediaProvider[]
 }
 
 export const userRepository = getRepository(User)
