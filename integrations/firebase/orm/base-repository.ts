@@ -31,6 +31,15 @@ export abstract class BaseRepository<T> {
     return this.firestore.collection(this.database, this.model.name)
   }
 
+  doc(
+    ...pathSegments: string[]
+  ): FireStore.DocumentReference<
+    FireStore.DocumentData,
+    FireStore.DocumentData
+  > {
+    return this.firestore.doc(this.database, this.model.name, ...pathSegments)
+  }
+
   private getSubCollections(): Record<keyof T, unknown> {
     return Reflect.getMetadata(
       'subCollections',
@@ -286,5 +295,26 @@ export abstract class BaseRepository<T> {
     await this.firestore.deleteDoc(
       this.firestore.doc(this.database, this.model.name, id)
     )
+  }
+
+  async update(
+    ref: FireStore.DocumentReference<
+      FireStore.DocumentData,
+      FireStore.DocumentData
+    >,
+    data: Record<string, unknown>
+  ): Promise<T> {
+    const path = ref.path.split('/')
+    const collection = path.length === 1 ? this.model.name : path[1]
+
+    const doc = await this.firestore.getDoc(ref)
+
+    if (!doc.exists()) {
+      throw new Error(`${collection} not found`)
+    }
+
+    await this.firestore.updateDoc(ref, data as FireStore.DocumentData)
+
+    return { id: this.getRefFromId(doc.id), ...data } as T
   }
 }
