@@ -322,7 +322,42 @@ const query = catRepository.query(catRepository.where('owner', '==', user.id))
 const cats = await catRepository.find(query, { populate: true })
 ```
 
-## Deleting a collection
+## Updating a document
+
+The updating mechanism is currently the less polished method of the auto generated repositories. There is no type safety on the data that is passed along to change the document. This method is literally pass through of the original update mechanism of firebase SDK.
+
+Here's an example of how to update a collection:
+
+```ts
+const ref = userRepository.doc(userPopulated.id.id)
+
+await userRepository.update(ref, {
+  name: 'joe'
+})
+```
+
+> Notice that we are not passing the id from the model but the string id that is found inside the reference of the model that is why we use `userPopulated.id.id` instead of `userPopulated.id`.
+
+Here's an example of how to update a subCollection:
+
+```ts
+const ref = userRepository.doc(
+  userPopulated.id.id,
+  'socialMediaProvider',
+  userPopulated.socialMediaProvider[0].id.id
+)
+
+await userRepository.update(ref, {
+  metadata: {
+    test: 'test',
+    test2: 'test2'
+  }
+})
+```
+
+> Notice that this time, we are passing in more parameters to the ref object. Keep in mind that the follow the pattern `id > collection > id > collection` until you reach the desired subcollection.
+
+## Deleting a document
 
 A document inside a collection can be deleted without removing all of the subcollection information. This is firebase `default` behavior; however, there is an additional option that can be passed to the delete method to cascade the deletion.
 
