@@ -10,6 +10,7 @@ import type { RecursiveOmit } from 'integrations/firebase/orm/types'
 import type { DocumentReference } from 'firebase/firestore'
 
 export const createDummyShelter = async (
+  shelterOwner: DocumentReference,
   shelterData?: Partial<Shelter>
 ): Promise<RecursiveOmit<Shelter, 'id'> & { id: DocumentReference }> => {
   // Create dummy media
@@ -18,6 +19,7 @@ export const createDummyShelter = async (
   )
 
   const dummyShelter = {
+    shelterOwner,
     name: faker.company.name(),
     description: faker.lorem.paragraph(),
     type: faker.helpers.arrayElement(Object.values(SupportedShelterTypes)),

@@ -12,7 +12,7 @@ import { Address } from './address'
 import { SubCollection } from '../orm/decorators/sub-collection'
 import { Type } from 'class-transformer'
 import { getRepository } from '../orm/get-repository'
-import type { DocumentReference } from 'firebase/firestore'
+import { DocumentReference } from 'firebase/firestore'
 
 export enum SupportedShelterTypes {
   MUNICIPAL = 'municipal',
@@ -48,7 +48,7 @@ export class Shelter {
   @IsDateString()
   registrationDate: string
 
-  @SubCollection('logos')
+  @SubCollection('logo')
   @Type(() => Media)
   @ValidateNested()
   logo: Media
@@ -57,6 +57,9 @@ export class Shelter {
   @Type(() => Media)
   @ValidateNested({ each: true })
   shelterMedia: Media[]
+
+  @IsNotEmpty()
+  shelterOwner: DocumentReference
 }
 
 export const shelterRepository = getRepository(Shelter)
